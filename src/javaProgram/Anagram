@@ -1,0 +1,40 @@
+package com.java;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Anagram {
+
+	public static void main(String[] args) {
+		/*
+		 * String str = "atul"; String str2 = "tual";
+		 */
+
+		/*
+		 * char[] arr=str.toCharArray(); char[] arr2=str2.toCharArray();
+		 * 
+		 * Arrays.sort(arr); Arrays.sort(arr2);
+		 * 
+		 * boolean b=Arrays.equals(arr, arr2); System.out.println(b);
+		 */
+
+		String[] input = {"act", "pots", "tops", "cat", "stops", "hat"};
+		 Map<String, List<String>> grouped = Arrays.stream(input)
+		            .collect(Collectors.groupingBy(str -> {
+		                char[] chars = str.toCharArray();
+		                Arrays.sort(chars);
+		                return new String(chars); // key: sorted string
+		            }));
+
+		        // Convert to List<List<String>> if needed
+		        List<List<String>> result = new ArrayList<>(grouped.values());
+
+		        // Print result
+		        System.out.println(result);
+
+	}
+
+}
