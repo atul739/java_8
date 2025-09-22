@@ -1,0 +1,33 @@
+package com.java;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import com.java.util.Employee_Poja;
+
+public class GroupEmployees {
+
+	public static void main(String[] args) {
+		List<Employee_Poja> employees = Arrays.asList(new Employee_Poja(101, "Alice", "HR", 5000),
+				new Employee_Poja(102, "Bob", "HR", 6000), new Employee_Poja(103, "Charlie", "IT", 7000),
+				new Employee_Poja(104, "David", "IT", 7000), new Employee_Poja(105, "Eva", "Finance", 6000),
+				new Employee_Poja(106, "Frank", "Finance", 6000));
+
+		// Grouping by department and salary
+		Map<String, Map<Double, List<Employee_Poja>>> grouped = employees.stream()
+				.collect(Collectors.groupingBy(Employee_Poja::getDepartment, Collectors.groupingBy(Employee_Poja::getSalary)));
+		
+
+		// Printing the grouped data
+		grouped.forEach((dept, salaryMap) -> {
+			System.out.println("Department: " + dept);
+			salaryMap.forEach((salary, empList) -> {
+				System.out.println("  Salary: " + salary);
+				empList.forEach(emp -> System.out.println("    " + emp));
+			});
+		});
+	}
+
+}
