@@ -1,0 +1,23 @@
+package com.java;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
+
+public class Triple {
+
+	public static void main(String[] args) {
+		
+		int[] arr = {1, 2, 3, 4, 5};
+
+        boolean hasIncreasingTriple = IntStream.range(0, arr.length - 2)
+                .anyMatch(i -> arr[i] < arr[i + 1] && arr[i + 1] < arr[i + 2]);
+
+        System.out.println("Has increasing triple: " + hasIncreasingTriple);
+       
+        
+        
+        
+	}
+
+}
