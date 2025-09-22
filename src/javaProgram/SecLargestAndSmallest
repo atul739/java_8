@@ -1,0 +1,26 @@
+package com.java;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class SecLargestAndSmallest {
+
+	public static void main(String[] args) {
+		int[] numbers = {5, 9, 11, 2, 8, 21, 1};
+		Integer smallNum=Arrays.stream(numbers).boxed().sorted().skip(1).findFirst().get();
+		System.out.println("smallNum:"+smallNum);
+		Integer largeNum=Arrays.stream(numbers).boxed().sorted(Comparator.reverseOrder()).skip(1).findFirst().get();
+		System.out.println("largeNum:"+largeNum);
+		
+		
+		String[] arr = {"apple", "banana", "orange", "grape", "kiwi"};
+		String smallString=Arrays.asList(arr).stream().sorted().skip(1).findFirst().get();
+		System.out.println("smallString:"+smallString);
+		String largeString=Arrays.asList(arr).stream().sorted(Comparator.reverseOrder()).skip(1).findFirst().get();
+		System.out.println("largeString:"+largeString);
+		
+		
+
+	}
+
+}
