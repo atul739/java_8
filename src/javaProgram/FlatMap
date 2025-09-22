@@ -1,0 +1,21 @@
+package com.java;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class FlatMap {
+
+	public static void main(String[] args) {
+		List<String> firstList = Arrays.asList("Stephen", "Nathan", "Williams");
+
+		List<String> secondList = Arrays.asList("Bob", "John", "Alice");
+
+		List<String> thirdList = Arrays.asList("Ramesh", "Suresh", "Naresh", "Rajesh");
+		List<List<String>> strList = Arrays.asList(firstList, secondList, thirdList);
+		List<String> list = strList.stream().flatMap(s -> s.stream()).collect(Collectors.toList());
+		System.out.println(list);
+
+	}
+
+}
