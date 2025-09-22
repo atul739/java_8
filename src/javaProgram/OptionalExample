@@ -1,0 +1,33 @@
+package com.java;
+
+import java.util.Optional;
+
+class EmployeeOp {
+    private int id;
+    private String name;
+    private String department;
+    private double salary;
+
+	/*
+	 * public EmployeeOp(int id, String name, String department, double salary) {
+	 * this.id = id; this.name = name; this.department = department; this.salary =
+	 * salary; }
+	 */
+
+    @Override
+    public String toString() {
+        return id + " - " + name + " - " + department + " - " + salary;
+    }
+}
+public class OptionalExample {
+	
+	    public static void main(String[] args) {
+	    	EmployeeOp emp = null;
+
+	    	 emp = Optional.ofNullable(emp).orElseGet(EmployeeOp::new);
+
+	        System.out.println(emp);
+	    }
+
+
+}
