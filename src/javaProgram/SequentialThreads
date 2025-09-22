@@ -1,0 +1,22 @@
+package com.java;
+
+public class SequentialThreads {
+
+	public static void main(String[] args) throws InterruptedException {
+		Thread th = new Thread(() -> {
+			for (int i = 0; i <= 5; i++) {
+				System.out.println("thread-1:"+i);
+			}
+		});
+		Thread th2 = new Thread(() -> {
+			for (int i = 6; i <= 10; i++) {
+				System.out.println("thread-2:"+i);
+			}
+		});
+		th.start();
+		th.join();
+		th2.start();
+		th2.join();
+	}
+
+}
