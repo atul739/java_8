@@ -1,0 +1,15 @@
+package com.java;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class SnakeToCamal {
+
+	public static void main(String[] args) {
+		String str = "Atul_patil_deloitte";
+		String output = Arrays.stream(str.split("_"))
+				.map(s -> s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase()).collect(Collectors.joining());
+		System.out.println(output);
+	}
+
+}
