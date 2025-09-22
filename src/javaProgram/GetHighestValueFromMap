@@ -1,0 +1,33 @@
+package com.java;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class GetHighestValueFromMap {
+
+	public static void main(String[] args) {
+		Map<Integer, String> map = new HashMap<>();
+		map.put(1, "Suraj");
+		map.put(2, "Pratik");
+		map.put(3, "Suraj");
+		map.put(4, "Suraj");
+		map.put(10, "Suraj");
+		map.put(11, "Pratik");
+		map.put(23, "Pratik");
+		map.put(22, "Atul");
+
+		Map<String, Integer> map2 = map.entrySet().stream()
+				.collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey, Integer::max));
+		 map2.forEach((k, v) -> System.out.println(k + " " + v));
+
+		int[] input = { 1, 1, 2, 3, 4, 2, 2, 3 };
+		int maxCount = Arrays.stream(input).boxed()
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())).entrySet().stream()
+				.max(Map.Entry.comparingByValue()).get().getKey();
+		System.out.println("maxCount: "+maxCount);
+	}
+
+}
