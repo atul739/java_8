@@ -1,0 +1,18 @@
+package com.java;
+
+public class String_Remove_Space {
+
+	public static void main(String[] args) {
+		String str = "Test the Product";
+		char[]arr=str.toCharArray();
+		StringBuffer sb=new StringBuffer();
+		for(int i=0;i<arr.length;i++) {
+			if(arr[i]!=' ') {
+				sb.append(arr[i]);
+			}
+		}
+		System.out.println(sb.toString());
+	}
+	
+
+}
