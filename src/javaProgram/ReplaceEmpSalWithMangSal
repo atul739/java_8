@@ -1,0 +1,61 @@
+package com.java;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.function.BinaryOperator;
+import java.util.stream.Collectors;
+
+import com.java.util.ClsEmployee;
+
+public class ReplaceEmpSalWithMangSal {
+
+	public static void main(String[] args) {
+		List<ClsEmployee> empList = Arrays.asList(new ClsEmployee(1, "sunil", 4000, "IT", null),
+				new ClsEmployee(2, "Abhi", 7000, "IT", 1), new ClsEmployee(3, "Adi", 8000, "IT", 1),
+				new ClsEmployee(4, "Alok", 5000, "HR", null), new ClsEmployee(5, "Ganesh", 6000, "HR", 4),
+				new ClsEmployee(6, "Sadhana", 9000, "HR", 4));
+
+		Map<Integer, ClsEmployee> empId = empList.stream().collect(Collectors.toMap(e -> e.getId(), e -> e));
+		// empId.forEach((k,v)->System.out.println(k+" "+v));
+
+		Map<String, ClsEmployee> empDept = empList.stream().collect(Collectors.toMap(ClsEmployee::getDepartment, e -> e,
+				BinaryOperator.maxBy(Comparator.comparingInt(emp -> emp.getSalary()))));
+		// empDept.forEach((k,v)->System.out.println(k+" "+v));
+
+		empDept.values().forEach(maxEmp -> updateManagerChain(maxEmp, empId, maxEmp.getSalary()));
+		empList.forEach(System.out::println);
+		System.out.println();
+		empDept.values().forEach(System.out::println);
+
+	}
+
+	private static void updateManagerChain(ClsEmployee emp, Map<Integer, ClsEmployee> mapId, int newSalary) {
+		if (emp.getManagerId() == null) 
+			return;
+			ClsEmployee manger =mapId.get(emp.getManagerId());
+			if (manger != null) {
+				
+				/*Expected output for - manger.setSalary(newSalary);
+				 * 
+				 * ClsEmployee [id=6, name=Sadhana, salary=9000, department=HR, managerId=4]
+				 * ClsEmployee [id=3, name=Adi, salary=8000, department=IT, managerId=1]
+				 */
+				manger.setSalary(newSalary);
+				
+				/*Expected output for - emp.setSalary(manger.getSalary());
+				 * 
+				 * ClsEmployee [id=6, name=Sadhana, salary=5000, department=HR, managerId=4]
+				 * ClsEmployee [id=3, name=Adi, salary=4000, department=IT, managerId=1]
+				 */
+				
+				//emp.setSalary(manger.getSalary());
+				updateManagerChain(manger, mapId, newSalary);
+			}
+		
+
+	}
+
+}
